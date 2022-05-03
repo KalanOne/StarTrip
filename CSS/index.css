@@ -1,0 +1,25 @@
+html, body{
+    height: 100%;
+}
+
+#portadaPrincipal{
+    height: 70%;
+    background: url("../IMG/Portada.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.mascaraPortada{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(42, 42, 42, 0.511);
+}
+
+#fondoCortado{
+    width: 100%;
+    background: url("../IMG/FondoCortado1.png");
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+}

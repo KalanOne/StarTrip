@@ -1,0 +1,12 @@
+Tabla Opiniones
+    Estado{
+        0: aun no disponible
+        1: pendiente
+        2: calificado
+    }
+
+Tabla Viaje
+    Estado{
+        0: activo
+        1: cerrado
+    }
