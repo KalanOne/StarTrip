@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
 
     $.ajax({
@@ -143,7 +141,7 @@ $(document).ready(function () {
                                                     <label for="equipajeViaje1">Documenta tu equipaje</label>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-success" onclick="reservar('${item.idViaje}')">Reservar</button>
+                                            <button type="button" class="btn btn-success" onclick="reservarViaje('${item.idViaje}')">Reservar</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -163,5 +161,39 @@ $(document).ready(function () {
     });
 });
 
+function reservarViaje(idViaje) {
+    var idUsuario = $("#idUsuarioActual").html();
 
-let f = "";
+    var lugares = $(`#lugaresViaje${idViaje}`).val();
+    var equipaje = $(`#equipajeViaje${idViaje}`).val();
+
+    if (lugares == null || lugares == "") {
+        alert("Defina los lugares");
+        return;
+    }
+
+    if (equipaje == null || equipaje == "") {
+        alert("Defina su equipaje");
+        return;
+    }
+
+    $.ajax({
+        type: "post",
+        url: "PHP/reservarLugar.php",
+        data: {
+            idUsuario: idUsuario,
+            lugares: lugares,
+            equiaje: equipaje,
+            idViaje, idViaje
+        },
+        success: function (response) {
+            if (response == "Exitoso") {
+                alert("Viaje agendado");
+                location.reload();
+            } else {
+                alert("Error al agendar viaje");
+                location.reload();
+            }
+        }
+    });
+}

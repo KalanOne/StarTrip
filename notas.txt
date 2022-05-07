@@ -10,3 +10,10 @@ Tabla Viaje
         0: activo
         1: cerrado
     }
+
+Tabla Pasajero
+    Estado{
+        0: pendiente
+        1: aceptado
+        2: rechazado
+    }

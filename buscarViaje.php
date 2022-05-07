@@ -37,7 +37,7 @@ if (!isset($idActual)) {
 
     <nav class="navbar navbar-dark bg-dark navbar-expand-md">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><?php
+            <a class="navbar-brand" href="buscarViaje.php"><?php
                 echo " ID: ";
                 echo '<span id="idUsuarioActual">';
                 echo $idActual;
@@ -58,22 +58,22 @@ if (!isset($idActual)) {
                 <a class="nav-link active" aria-current="page" href="#">Buscar viaje</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="misViajes.html">Mis viajes</a>
+                <a class="nav-link" href="misViajes.php">Mis viajes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="apuntarViaje.html">Apuntar viaje</a>
+                <a class="nav-link" href="apuntarViaje.php">Apuntar viaje</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="misAutomoviles.html">Mis automoviles</a>
+                <a class="nav-link" href="misAutomoviles.php">Mis automoviles</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="calificarUsuario.html">Calificar usuario</a>
+                <a class="nav-link" href="calificarUsuario.php">Calificar usuario</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="cuenta.html">Cuenta</a>
+                <a class="nav-link" href="cuenta.php">Cuenta</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="promociones.html">Promociones</a>
+                <a class="nav-link" href="promociones.php">Promociones</a>
             </li>
         </ul>
     </div>
