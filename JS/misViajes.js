@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "post",
-        url: "PHP/rellenoMisViaje1.php",
+        url: "PHP/rellenoMisViajes1.php",
         data: {
             idUsuarioActual, idUsuarioActual
         },
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
                 $.ajax({
                     type: "post",
-                    url: "PHP/rellenoMisViaje2.php",
+                    url: "PHP/rellenoMisViajes2.php",
                     data: {
                         idViaje: item.idViaje
                     },
