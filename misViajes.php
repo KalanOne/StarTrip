@@ -80,7 +80,7 @@ if (!isset($idActual)) {
 
 
     <div id="contieneViajes" class=" minimoFoot">
-        <section class="container py-3 my-2">
+        <!-- <section class="container py-3 my-2">
             <div class="row">
                 <ul class="list-group list-group-horizontal-md">
                     <li class="list-group-item flex-fill">ID: 1</li>
@@ -113,12 +113,12 @@ if (!isset($idActual)) {
                     </button>
                 </div>
                 <div class="col-md-2 d-flex align-content-around flex-wrap justify-content-center">
-                    <button type="button" class="btn btn-outline-success">Aceptar</button>
+                    <button type="button" class="btn btn-outline-success" onclick="aceptarUsuario('1')">Aceptar</button>
                     <button type="button" class="btn btn-outline-danger">Rechazar</button>
                 </div>
-            </div>
+            </div> -->
             <!-- Segunda persona -->
-            <div class="row mt-3 border border-secondary">
+            <!-- <div class="row mt-3 border border-secondary">
                 <div class="col-md-3">
                     <p>Hector Reyes Reyes</p>
                     <p>33 años</p>
@@ -143,11 +143,11 @@ if (!isset($idActual)) {
                     <button type="button" class="btn btn-outline-success disabled">Aceptado</button>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- ========== Start Modales ========== -->
         
-        <div class="modal fade" id="Opinion1" tabindex="-1" aria-hidden="true">
+        <!-- <div class="modal fade" id="Opinion1" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -188,11 +188,13 @@ if (!isset($idActual)) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- ========== End Modales ========== -->
 
     </div>
+
+    <div id="contieneModales"></div>
 
     <footer class="bg-dark text-center text-white py-5 my-2">
         <div class="container p-4 pb-0">
