@@ -42,7 +42,7 @@ try {
                 $idUsuario = $item2->idUsuario;
             }
 
-            $q = "INSERT INTO `contacto` (`idContacto`, `nombre`, `correo`, `telefono`, `idUsuario`) VALUES ('$idUsuario', '$nombreCont', '$correoCont', '$telCont', '$idUsuario')";
+            $q = "INSERT INTO `contacto` (`idContacto`, `nombreCont`, `correoCont`, `telefonoCont`, `fechaNacCont`, `idUsuario`) VALUES ('$idUsuario', '$nombreCont', '$correoCont', '$telCont', '$fechaCont', '$idUsuario')";
             $res  = $conexion->query($q) or die(print($conexion->errorInfo()));
 
             echo "Registrado";
