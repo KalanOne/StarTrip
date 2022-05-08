@@ -29,6 +29,8 @@ $(document).ready(function () {
         var origen = $("#inputOrigen").val();
         var destino = $("#inputDestino").val();
         var fecha = $("#inputFecha").val();
+        let tablas = "";
+        let modales = "";
 
         if (fecha == null || fecha == "") {
             alert("Escoge la fecha del viaje");
@@ -44,8 +46,7 @@ $(document).ready(function () {
                 fecha: fecha
             },
             success: function (response) {
-                let tablas = "";
-                let modales = "";
+
 
                 response = JSON.parse(response);
 
@@ -63,6 +64,8 @@ $(document).ready(function () {
                             <td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#Reservar${item.idViaje}">Reservar</button></td>
                         </tr>
                     `;
+
+
 
                     $.ajax({
                         type: "POST",
@@ -102,7 +105,7 @@ $(document).ready(function () {
                                     <td>${item2.descripcion}</td>
                                 </tr>
                                 `;
-                            })
+                            });
 
                             modales += `
                                             </tbody>
@@ -115,8 +118,12 @@ $(document).ready(function () {
                                 </div>
                             </div>
                             `;
+
+
                         },
                     });
+
+
 
                     modales += `
                         <div class="modal fade" id="Reservar${item.idViaje}" tabindex="-1" aria-hidden="true">
@@ -154,9 +161,18 @@ $(document).ready(function () {
 
                 })
 
-                $("#columnasViajes").html(tablas);
-                $("#modales").html(modales);
+
             },
+        });
+
+        $(document).ajaxStop(function () {
+            tablas += `
+            <tr>
+                <th scope="row" colspan="9" class="text-center">No se han encontrado mas viajes</th>
+            </tr>
+        `;
+            $("#columnasViajes").html(tablas);
+            $("#modales").html(modales);
         });
     });
 });

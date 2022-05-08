@@ -7,7 +7,7 @@ $idUsuarioActual = $_POST['idUsuarioActual'];
 try {
     //code...
 
-    $q = "SELECT * FROM `viaje` NATURAL JOIN `auto` NATURAL JOIN `municipio` NATURAL JOIN `usuario` NATURAL JOIN `destino` WHERE `viaje`.`idUsuario` = '$idUsuarioActual' AND `viaje`.`estado` = 0";
+    $q = "SELECT * FROM `viaje` INNER JOIN `auto` ON `viaje`.`idAuto` = `auto`.`idAuto` INNER JOIN `municipio` ON `viaje`.`idOrigen` = `municipio`.`idMunicipio` INNER JOIN `usuario` ON `viaje`.`idUsuario` = `usuario`.`idUsuario` INNER JOIN `destino` ON `viaje`.`idDestino` = `destino`.`idDestino` WHERE `viaje`.`idUsuario` = '$idUsuarioActual' AND `viaje`.`estado` = 0";
     $res = $conexion->query($q) or die(print($conexion->errorInfo()));
 
     $data = [];

@@ -28,11 +28,17 @@ $(document).ready(function () {
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-2 d-flex align-content-around flex-wrap justify-content-center">
-                            <button type="button" class="btn btn-outline-danger" onclick="eliminarAuto('${item.idAuto}')>Eliminar</button>
+                            <button type="button" class="btn btn-outline-danger" onclick="eliminarAuto('${item.idAuto}')">Eliminar</button>
                         </div>
                     </div>
                 `;
             });
+
+            misAutos += `
+                <h3 class="text-center mt-5">
+                    <small class="text-muted">No se han encontrado mas automóviles de su pertenencia</small>
+                </h3>
+            `;
 
             $("#Automoviles").html(misAutos);
         }
@@ -78,9 +84,9 @@ $(document).ready(function () {
                 if (response == "Exitoso") {
                     alert("Registrado con exito");
                     location.reload();
-                } else if(response == "Registrado"){
+                } else if (response == "Automovil resgitrado") {
                     alert("Automovil resgitrado");
-                } else{
+                } else {
                     alert("Algo salio mal");
                 }
             }

@@ -11,6 +11,9 @@ $(document).ready(function () {
         },
         success: function (response) {
 
+            console.log(modales);
+            console.log(info);
+
             response = JSON.parse(response);
 
             response.map(item => {
@@ -37,6 +40,9 @@ $(document).ready(function () {
                     },
                     success: function (response2) {
                         response2 = JSON.parse(response2);
+
+                        console.log(modales);
+                        console.log(info);
 
                         response2.map(item2 => {
                             info += `
@@ -67,7 +73,7 @@ $(document).ready(function () {
                                 info += `
                                     <div class="col-md-2 d-flex align-content-around flex-wrap justify-content-center">
                                         <button type="button" class="btn btn-outline-success" onclick="aceptarUsuario('${item2.idUsuario}', '${item.idViaje}', '${item2.idPasajero}')">Aceptar</button>
-                                        <button type="button" class="btn btn-outline-danger" onclick="rechazarUsuario('${item2.idPasajero}')>Rechazar</button>
+                                        <button type="button" class="btn btn-outline-danger" onclick="rechazarUsuario('${item2.idPasajero}')">Rechazar</button>
                                     </div>
                                 </div>
                                 `;
@@ -90,6 +96,9 @@ $(document).ready(function () {
 
                                     response3 = JSON.parse(response3);
 
+                                    console.log(modales);
+                                    console.log(info);
+
                                     modales += `
                                     <div class="modal fade" id="Opinion${item2.idUsuario}" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
@@ -110,7 +119,7 @@ $(document).ready(function () {
                                                     <tbody>
                                     `;
 
-                                    respuesta.map(item3 => {
+                                    response3.map(item3 => {
                                         modales += `
                                         <tr>
                                             <th scope="row">${item3.idOpinion}</th>
@@ -142,6 +151,9 @@ $(document).ready(function () {
         }
     });
 
+    console.log(modales);
+    console.log(info);
+
     $.ajax({
         type: "post",
         url: "PHP/rellenoMisViajes3.php",
@@ -150,6 +162,9 @@ $(document).ready(function () {
         },
         success: function (response) {
             response = JSON.parse(response);
+
+            console.log(modales);
+            console.log(info);
 
             response.map(item => {
                 $.ajax({
@@ -160,6 +175,9 @@ $(document).ready(function () {
                     },
                     success: function (response2) {
                         response2 = JSON.parse(response2);
+
+                        console.log(modales);
+                        console.log(info);
 
                         response2.map(item2 => {
                             info += `
@@ -184,6 +202,9 @@ $(document).ready(function () {
                                 },
                                 success: function (response3) {
                                     response3 = JSON.parse(response3);
+
+                                    console.log(modales);
+                                    console.log(info);
 
                                     response3.map(item3 => {
                                         info += `
@@ -221,6 +242,9 @@ $(document).ready(function () {
 
                                                 response4 = JSON.parse(response4);
 
+                                                console.log(modales);
+                                                console.log(info);
+
                                                 modales += `
                                                 <div class="modal fade" id="Opinion${item3.idUsuario}" tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-scrollable">
@@ -241,7 +265,7 @@ $(document).ready(function () {
                                                                 <tbody>
                                                 `;
 
-                                                respuesta.map(item4 => {
+                                                response4.map(item4 => {
                                                     modales += `
                                                     <tr>
                                                         <th scope="row">${item4.idOpinion}</th>
@@ -273,11 +297,23 @@ $(document).ready(function () {
                     }
                 });
             });
+
         }
     });
 
-    $("#contieneModales").html(modales);
-    $("#contieneViajes").html(info);
+
+    $(document).ajaxStop(function () {
+        info += `
+            <h3 class="text-center mt-5">
+                <small class="text-muted">No se han encontrado mas viajes activos a los que pertenezca</small>
+            </h3>
+        `;
+        console.log(modales);
+        console.log(info);
+        $("#contieneModales").html(modales);
+        $("#contieneViajes").html(info);
+    });
+
 });
 
 function getEdad(dateString) {
@@ -322,6 +358,8 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
         success: function (response) {
             response = JSON.parse(response);
 
+            console.log(response);
+
             response.map(item => {
                 $.ajax({
                     type: "post",
@@ -332,9 +370,9 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
                         idViaje: idViaje
                     },
                     success: function (response2) {
+                        console.log(response2);
                         if (response2 != "Exitoso") {
                             alert("Algo salio mal");
-                            location.reload();
                         }
                     }
                 });
@@ -350,6 +388,7 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
         },
         success: function (response) {
             response = JSON.parse(response);
+            console.log(response);
 
             response.map(item => {
                 $.ajax({
@@ -361,9 +400,9 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
                         idViaje: idViaje
                     },
                     success: function (response2) {
+                        console.log(response2);
                         if (response2 != "Exitoso") {
                             alert("Algo salio mal");
-                            location.reload();
                         }
                     }
                 });
@@ -371,5 +410,20 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
         }
     });
 
-    location.reload();
+    $.ajax({
+        type: "post",
+        url: "PHP/aceptarUsuario2.php",
+        data: {
+            idPasajero: idPasajero
+        },
+        success: function (response3) {
+            if (response3 == "Exitoso") {
+                alert("Aceptado con exito");
+            } else {
+                alert("Algo salio mal");
+            }
+
+            location.reload();
+        }
+    });
 }

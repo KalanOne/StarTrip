@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var idUsuarioActual = $("#idUsuarioActual").html();
+    var relleno = "";
 
     $.ajax({
         type: "post",
@@ -10,7 +11,7 @@ $(document).ready(function () {
         success: function (response) {
             response = JSON.parse(response);
 
-            var relleno = "";
+            
 
             response.map(item => {
 
@@ -58,9 +59,15 @@ $(document).ready(function () {
 
             });
 
-            $("#contienePersonas").html(relleno);
+            
         }
     });
+
+    $(document).ajaxStop(function () {
+        console.log(relleno);
+        $("#contienePersonas").html(relleno);
+    });
+
 });
 
 function calificar(idOpinion) {

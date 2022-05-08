@@ -132,7 +132,6 @@ if (!isset($idActual)) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="#">
                             <form action="#" autocomplete="off">
                                 <div class="mb-2">
                                     <label for="inputMarca" class="form-label">Marca</label>
@@ -152,7 +151,6 @@ if (!isset($idActual)) {
                                 </div>
                                 <button type="button" class="btn btn-success" id="enviarAuto">Guardar</button>
                             </form>
-                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

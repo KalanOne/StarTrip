@@ -11,7 +11,7 @@ try {
     $q = "INSERT INTO `pasajero` (`idPasajero`, `lugares`, `edoAcep`, `equipaje`, `idViaje`, `idUsuario`) VALUES (NULL, '$lugares', '0', '$equiaje', '$idViaje', '$idUsuario')";
     $res = $conexion->query($q) or die(print($conexion->errorInfo()));
 
-    echo json_encode("Exitoso");
+    echo "Exitoso";
 } catch (PDOException $th) {
     //throw $th;
     echo $th->getMessage();

@@ -83,7 +83,7 @@ if (!isset($idActual)) {
         <div class="row mb-4">
             <h3 class="text-center fw-light" id="nombreCompleto"></h3>
         </div>
-        <form action="#">
+        <form action="#" autocomplete="off">
             <div class="row my-2">
                 <div class="col-md-1">
                     <label for="inputNombre" class="col-form-label">Nombre</label>
