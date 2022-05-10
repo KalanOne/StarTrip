@@ -29,12 +29,14 @@ if (!isset($idActual)) {
     <link rel="stylesheet" href="Icons/fontawesome-free-6.1.1-web/css/all.css">
     <link rel="stylesheet" href="CSS/promociones.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <script src="JQuey/jquery.min.js"></script>
     <script src="JS/promociones.js"></script>
 </head>
 
 <body>
 
+    <!-- ========== Start Menu principal ========== -->
     <nav class="navbar navbar-dark bg-dark navbar-expand-md">
         <div class="container">
             <a class="navbar-brand" href="promociones.php"><?php
@@ -51,7 +53,11 @@ if (!isset($idActual)) {
             </ul>
         </div>
     </nav>
+    <!-- ========== End Menu principal ========== -->
 
+
+
+    <!-- ========== Start Menu de navegacion ========== -->
     <div class="container">
         <ul class="nav">
             <li class="nav-item">
@@ -77,9 +83,17 @@ if (!isset($idActual)) {
             </li>
         </ul>
     </div>
+    <!-- ========== End Menu de navegacion ========== -->
 
+
+
+    <!-- ========== Start Contenido de promociones ========== -->
     <div class="container py-3 my-2 minimoFoot">
+
+        <!-- ========== Start Contenido de promociones vigentes ========== -->
         <div class="row row-cols-1 row-cols-md-2 g-3" id="contienePromociones">
+
+            <!-- ========== Start Contenido de ejemplo de promociones vigentes ========== -->
             <!-- <div class="col">
                 <div class="card h-100">
                     <img src="IMGPU/cinepolis.jpg" class="card-img-top" alt="...">
@@ -116,12 +130,23 @@ if (!isset($idActual)) {
                     </div>
                 </div>
             </div> -->
+            <!-- ========== End Contenido de ejemplo de promociones vigentes ========== -->
+
         </div>
+        <!-- ========== End Contenido de promociones vigentes ========== -->
+
+        <!-- ========== Start Mensaje de no encontrar mas promociones vigentes ========== -->
         <h3 class="text-center mt-5">
             <small class="text-muted">No se han encontrado mas promociones vigentes</small>
         </h3>
-    </div>
+        <!-- ========== End Mensaje de no encontrar mas promociones vigentes ========== -->
 
+    </div>
+    <!-- ========== End Contenido de promociones ========== -->
+
+
+
+    <!-- ========== Start Pie de pagina web ========== -->
     <footer class="bg-dark text-center text-white py-5 my-2">
         <div class="container p-4 pb-0">
             <div class="row">
@@ -154,9 +179,11 @@ if (!isset($idActual)) {
                 </div>
             </div>
         </div>
-
     </footer>
+    <!-- ========== End Pie de pagina web ========== -->
 
+
+    
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>

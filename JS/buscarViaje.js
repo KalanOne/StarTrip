@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    //  Relleno de municipios en Michoacan para los selects de Origen y Destino  //
     $.ajax({
         type: "post",
         url: "PHP/lugares.php",
@@ -21,22 +22,27 @@ $(document).ready(function () {
         }
     });
 
-
+    //  Se genera la accion al dar click en el boton para buscar viaje  //
     $("#buscarViajeBTN").click(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
 
+        //  Se obtienen los datos puestos en el formulario  //
         var origen = $("#inputOrigen").val();
         var destino = $("#inputDestino").val();
         var fecha = $("#inputFecha").val();
+
+        //  Se declaran las variables de relleno para el html dividio en 2  //
         let tablas = "";
         let modales = "";
 
+        //  Se verifican que sean vacios los datos  //
         if (fecha == null || fecha == "") {
             alert("Escoge la fecha del viaje");
             return;
         }
 
+        //  Se hace solicitud para la busqueda viaje con las caracterisiticas dadas  //
         $.ajax({
             type: "POST",
             url: "PHP/busquedaViaje.php",
@@ -50,6 +56,11 @@ $(document).ready(function () {
 
                 response = JSON.parse(response);
 
+                //  Para el caso de los resultados se genera las tuplas  //
+                //  para la tabla donde se mostraran los resultados con  //
+                //  sus respectivos botones para accionar los modales de  //
+                //  opiniones del conductor y reservar lugares pasando  //
+                // ~ por una iteracion de cada resultado ~ //
                 response.map(item => {
                     tablas += `
                         <tr>
@@ -66,7 +77,8 @@ $(document).ready(function () {
                     `;
 
 
-
+                    //  Se hace solicitud para la busqueda de las opiniones  //
+                    //  de cada uno de los conductores de los viajes encontrados  //
                     $.ajax({
                         type: "POST",
                         url: "PHP/opiniones.php",
@@ -77,6 +89,7 @@ $(document).ready(function () {
 
                             respuesta = JSON.parse(respuesta);
 
+                            //  Se crea el modal para la opinion del conductor  //
                             modales += `
                             <div class="modal fade" id="Opinion${item.idUsuario}" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable">
@@ -97,6 +110,7 @@ $(document).ready(function () {
                                             <tbody>
                             `;
 
+                            //  Se crean las tuplas para la tabla con cada opinion del conductor  //
                             respuesta.map(item2 => {
                                 modales += `
                                 <tr>
@@ -107,6 +121,7 @@ $(document).ready(function () {
                                 `;
                             });
 
+                            //  Se termina el modal de las opiniones del conductor  //
                             modales += `
                                             </tbody>
                                             </table>
@@ -123,8 +138,7 @@ $(document).ready(function () {
                         },
                     });
 
-
-
+                    //  Se genera el modal para la reserva del lugar  //
                     modales += `
                         <div class="modal fade" id="Reservar${item.idViaje}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
@@ -165,34 +179,47 @@ $(document).ready(function () {
             },
         });
 
+        //  Se crea funcion para ejectar primero todas las solicitudes  //
         $(document).ajaxStop(function () {
+
+            //  Al final de la tabla de los resultados  //
+            //  se crea una leyenda para indicar que ya  //
+            // ~~~~~~~~~~ no hay mas viajes ~~~~~~~~~~ //
             tablas += `
-            <tr>
-                <th scope="row" colspan="9" class="text-center">No se han encontrado mas viajes</th>
-            </tr>
-        `;
+                <tr>
+                    <th scope="row" colspan="9" class="text-center">No se han encontrado mas viajes</th>
+                </tr>
+            `;
+
+            //  Se insertan las cadenas de html generados en los puntos que corresponden  //
             $("#columnasViajes").html(tablas);
             $("#modales").html(modales);
         });
     });
 });
 
+//  Se crea funcion para reservar el lugar en el viaje  //
+//  Se solicita el id del viaje a reservar  //
 function reservarViaje(idViaje) {
+
+    // ~ Se obtiene el id del usuario actual ~ //
     var idUsuario = $("#idUsuarioActual").html();
 
+    //  Se obtienen los datos puestos en el formulario  //
     var lugares = $(`#lugaresViaje${idViaje}`).val();
     var equipaje = $(`#equipajeViaje${idViaje}`).val();
 
+    //  Se verifican que no sean vacios los datos  //
     if (lugares == null || lugares == "") {
         alert("Defina los lugares");
         return;
     }
-
     if (equipaje == null || equipaje == "") {
         alert("Defina su equipaje");
         return;
     }
 
+    //  Se hace solicitud para reservar el lugar en el viaje  //
     $.ajax({
         type: "post",
         url: "PHP/reservarLugar.php",

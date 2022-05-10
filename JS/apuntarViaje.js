@@ -1,6 +1,9 @@
 $(document).ready(function () {
+
+    // ~ Se obtiene el id del usuario actual ~ //
     var idUsuarioActual = $("#idUsuarioActual").html();
 
+    //  Relleno de municipios en Michoacan para los selects de Origen y Destino  //
     $.ajax({
         type: "post",
         url: "PHP/lugares.php",
@@ -22,6 +25,7 @@ $(document).ready(function () {
         }
     });
 
+    //  Relleno de automoviles del usuario actual para el select de automovil  //
     $.ajax({
         type: "post",
         url: "PHP/automoviles.php",
@@ -44,10 +48,12 @@ $(document).ready(function () {
         }
     });
 
+    //  Se genera la accion al dar click en el boton para crear viaje  //
     $("#apuntarViaje").click(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
 
+        //  Se obtienen los datos puestos en el formulario  //
         var origen = $("#inputOrigen").val();
         var destino = $("#inputDestino").val();
         var fecha = $("#inputFecha").val();
@@ -55,6 +61,7 @@ $(document).ready(function () {
         var auto = $("#inputAuto").val();
         var lugares = $("#inputLugares").val();
 
+        //  Se verifican que sean no vacios los datos  //
         if (origen == null || origen == "") {
             alert("Origen vacio");
             return;
@@ -84,7 +91,7 @@ $(document).ready(function () {
             return;
         }
 
-
+        //  Se hace solicitud para el registro del viaje pasando cada uno de los viajes  //
         $.ajax({
             type: "post",
             url: "PHP/resgistrarViaje.php",

@@ -1,7 +1,13 @@
 $(document).ready(function () {
+
+    // ~ Se obtiene el id del usuario actual ~ //
     var idUsuarioActual = $("#idUsuarioActual").html();
+
+    //  Se declara la variable de relleno para el html  //
     var relleno = "";
 
+    //  Se hace solicitud para obtener cada uno de las  //
+    //  opiniones disponibles para el usuario  //
     $.ajax({
         type: "post",
         url: "PHP/rellenoCalificarUsuario1.php",
@@ -11,8 +17,8 @@ $(document).ready(function () {
         success: function (response) {
             response = JSON.parse(response);
 
-            
-
+            //  Para cada uno de las opiniones se hace la solicitud  //
+            // ~~~~~~ de informacion del usuario ~~~~~ //
             response.map(item => {
 
                 $.ajax({
@@ -24,7 +30,13 @@ $(document).ready(function () {
                     success: function (response2) {
                         response2 = JSON.parse(response2);
 
+                        //  Se genera una iteracion para acceder a los datos del usuario  //
+                        //  aunque se sabe que solo hay 1 registro  //
+                        // ~~~~~ Asi que solo se ejcuta 1 vez ~~~~ //
                         response2.map(item2 => {
+
+                            //  Se genera el contenido del formulario  //
+                            // ~~~~~~~ para el usuario a opinar ~~~~~~ //
                             relleno += `
                                 <form action="#">
                                     <div class="row mt-3 border border-secondary py-2">
@@ -58,27 +70,42 @@ $(document).ready(function () {
                 });
 
             });
-
-            
         }
     });
 
+    //  Se crea funcion para ejectar primero todas las solicitudes  //
     $(document).ajaxStop(function () {
-        console.log(relleno);
+
+        // ~~~~~~ Al final de los resultados ~~~~~ //
+        //  se crea una leyenda para indicar que ya  //
+        // ~~~~~~~ no hay usuarios a opinar ~~~~~~ //
+        relleno += `
+            <h3 class="text-center mt-5">
+                <small class="text-muted">No se han encontrado mas usuarios para opinar</small>
+            </h3>
+        `;
+
+        //  Se inserta la cadena de html generada en el que corresponde  //
         $("#contienePersonas").html(relleno);
     });
 
 });
 
+//  Se crea funcion para opinar al usuario  //
+// ~~~ Se solicita el id de la opinion ~~~ //
 function calificar(idOpinion) {
+
+    //  Se obtienen los datos puestos en el formulario  //
     var calificacion = $(`#inputCalificacion${idOpinion}`).val();
     var opinion = $(`#inputOpinion${idOpinion}`).val();
 
+
+    //  Se verifican que no sean vacios los datos  //
     if (calificacion == null || calificacion == "") {
         alert("Calificacion vacia");
         return;
-    }else if (calificacion < 0 || calificacion > 5) {
-        alert("No se acepta calificacion menor a 0 y mayor a 5");
+    } else if (calificacion < 0 || calificacion > 5) {
+        alert("No se acepta calificacion menor a 0 o mayor a 5");
         return;
     }
     if (opinion == null || opinion == "") {
@@ -86,6 +113,7 @@ function calificar(idOpinion) {
         return;
     }
 
+    //  Se hace solicitud para el registro de la opinion  //
     $.ajax({
         type: "post",
         url: "PHP/calificarUsuario.php",

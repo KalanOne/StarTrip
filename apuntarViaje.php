@@ -30,12 +30,14 @@ if (!isset($idActual)) {
     <link rel="stylesheet" href="Icons/fontawesome-free-6.1.1-web/css/all.css">
     <link rel="stylesheet" href="CSS/apuntarViaje.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <script src="JQuey/jquery.min.js"></script>
     <script src="JS/apuntarViaje.js"></script>
 </head>
 
 <body>
 
+    <!-- ========== Start Menu principal ========== -->
     <nav class="navbar navbar-dark bg-dark navbar-expand-md">
         <div class="container">
             <a class="navbar-brand" href="apuntarViaje.php"><?php
@@ -52,7 +54,11 @@ if (!isset($idActual)) {
             </ul>
         </div>
     </nav>
+    <!-- ========== End Menu principal ========== -->
 
+    
+
+    <!-- ========== Start Menu de navegacion ========== -->
     <div class="container">
         <ul class="nav">
             <li class="nav-item">
@@ -78,7 +84,11 @@ if (!isset($idActual)) {
             </li>
         </ul>
     </div>
+    <!-- ========== End Menu de navegacion ========== -->
+    
 
+
+    <!-- ========== Start Formulario para crear un viaje ========== -->
     <div class="container py-3 my-5 minimoFoot">
         <form action="#">
             <div class="row">
@@ -142,7 +152,11 @@ if (!isset($idActual)) {
             </div>
         </form>
     </div>
+    <!-- ========== End Formulario para crear un viaje ========== -->
+    
 
+
+    <!-- ========== Start Pie de pagina web ========== -->
     <footer class="bg-dark text-center text-white py-5 my-2">
         <div class="container p-4 pb-0">
             <div class="row">
@@ -175,8 +189,10 @@ if (!isset($idActual)) {
                 </div>
             </div>
         </div>
-
     </footer>
+    <!-- ========== End Pie de pagina web ========== -->
+    
+    
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
