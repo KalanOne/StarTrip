@@ -3,10 +3,16 @@
 session_start();
 $nombre = $_SESSION['nombre'];
 $idActual = $_SESSION['idActual'];
+$admin = $_SESSION['admin'];
 
 if (!isset($idActual)) {
     # code...
     header("location: index.html");
+    exit();
+}
+if ($admin == "Si") {
+    # code...
+    header("location: subirPublicidad.php");
     exit();
 }
 
@@ -333,8 +339,8 @@ if (!isset($idActual)) {
         </div>
     </footer>
     <!-- ========== End Pie de pagina web ========== -->
-    
-    
+
+
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

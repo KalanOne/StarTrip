@@ -28,8 +28,12 @@ $(document).ready(function () {
                 contra: contra,
             },
             success: function (response) {
-                if (response != "") {
+                if (response == "Usuario") {
+                    // ~~~~~~~~~~ Usuario logeado ~~~~~~~~~ //
                     window.open("buscarViaje.php", "_self");
+                } else if (response == "admin") {
+                    // ~~~~~~~~~~~~ Admin logueado ~~~~~~~~~~~ //
+                    window.open("subirPublicidad.php", "_self");
                 } else {
                     // No hay informacion del usuario
                     alert("Correo y/o contraseña incorrectos");
@@ -137,7 +141,7 @@ $(document).ready(function () {
                 } else {
                     alert("Correo electrónico registrado");
                 }
-                
+
             },
         });
 

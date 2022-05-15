@@ -27,13 +27,39 @@ try {
 
                 $_SESSION['nombre'] = $item2->nombre;
                 $_SESSION['idActual'] = $item2->idUsuario;
-                echo $item2->idUsuario . '\t' . $item2->nombre;
+                $_SESSION['admin'] = "No";
+                echo "Usuario";
                 return;
             }
-        }else{
-            session_destroy();
-            echo "";
-            return;
+        } else {
+
+            $q = "SELECT COUNT(*) as `Contar` FROM `adminstrador` WHERE `correo` = '$correo'";
+            $consulta = $conexion->query($q) or die(print($conexion->errorInfo()));
+
+            while ($item2 = $consulta->fetch(PDO::FETCH_OBJ)) {
+                # code...
+                if ($item2->Contar == 1) {
+                    # code...
+                    $q = "SELECT * FROM `adminstrador` WHERE `correo` = '$correo' and `contrasenia` = '$contra'";
+                    $res  = $conexion->query($q) or die(print($conexion->errorInfo()));
+
+                    while ($item2 = $res->fetch(PDO::FETCH_OBJ)) {
+                        # code...
+
+                        $_SESSION['nombre'] = $item2->nombre;
+                        $_SESSION['idActual'] = $item2->idUsuario;
+                        $_SESSION['admin'] = "Si";
+                        echo "Admin";
+                        return;
+                    }
+                } else {
+                    # code...
+
+                    session_destroy();
+                    echo "Datos mal";
+                    return;
+                }
+            }
         }
     }
 } catch (PDOException $th) {

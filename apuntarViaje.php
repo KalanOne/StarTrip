@@ -3,10 +3,16 @@
 session_start();
 $nombre = $_SESSION['nombre'];
 $idActual = $_SESSION['idActual'];
+$admin = $_SESSION['admin'];
 
 if (!isset($idActual)) {
     # code...
     header("location: index.html");
+    exit();
+}
+if ($admin == "Si") {
+    # code...
+    header("location: subirPublicidad.php");
     exit();
 }
 
