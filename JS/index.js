@@ -31,12 +31,14 @@ $(document).ready(function () {
                 if (response == "Usuario") {
                     // ~~~~~~~~~~ Usuario logeado ~~~~~~~~~ //
                     window.open("buscarViaje.php", "_self");
-                } else if (response == "admin") {
+                } else if (response == "Admin") {
                     // ~~~~~~~~~~~~ Admin logueado ~~~~~~~~~~~ //
                     window.open("subirPublicidad.php", "_self");
-                } else {
+                } else if (response == "Datos mal") {
                     // No hay informacion del usuario
                     alert("Correo y/o contraseña incorrectos");
+                } else {
+                    alert("Ninguno");
                 }
             },
         });

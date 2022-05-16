@@ -36,18 +36,18 @@ try {
             $q = "SELECT COUNT(*) as `Contar` FROM `adminstrador` WHERE `correo` = '$correo'";
             $consulta = $conexion->query($q) or die(print($conexion->errorInfo()));
 
-            while ($item2 = $consulta->fetch(PDO::FETCH_OBJ)) {
+            while ($item3 = $consulta->fetch(PDO::FETCH_OBJ)) {
                 # code...
-                if ($item2->Contar == 1) {
+                if ($item3->Contar == 1) {
                     # code...
                     $q = "SELECT * FROM `adminstrador` WHERE `correo` = '$correo' and `contrasenia` = '$contra'";
                     $res  = $conexion->query($q) or die(print($conexion->errorInfo()));
 
-                    while ($item2 = $res->fetch(PDO::FETCH_OBJ)) {
+                    while ($item4 = $res->fetch(PDO::FETCH_OBJ)) {
                         # code...
 
-                        $_SESSION['nombre'] = $item2->nombre;
-                        $_SESSION['idActual'] = $item2->idUsuario;
+                        $_SESSION['nombre'] = "";
+                        $_SESSION['idActual'] = $item4->idAdministrador;
                         $_SESSION['admin'] = "Si";
                         echo "Admin";
                         return;
