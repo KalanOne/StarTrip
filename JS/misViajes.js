@@ -349,6 +349,7 @@ function rechazarUsuario(idPasajero) {
 }
 
 function aceptarUsuario(idUsuario, idViaje, idPasajero) {
+    var idUsuarioActual = $("#idUsuarioActual").html();
     $.ajax({
         type: "post",
         url: "PHP/rellenoMisViajes5.php",
@@ -382,31 +383,17 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
 
     $.ajax({
         type: "post",
-        url: "PHP/rellenoMisViajes4.php",
+        url: "PHP/aceptarUsuario1.php",
         data: {
+            idUsuario1: idUsuario,
+            idUsuario2: idUsuarioActual,
             idViaje: idViaje
         },
-        success: function (response) {
-            response = JSON.parse(response);
-            console.log(response);
-
-            response.map(item => {
-                $.ajax({
-                    type: "post",
-                    url: "PHP/aceptarUsuario1.php",
-                    data: {
-                        idUsuario1: idUsuario,
-                        idUsuario2: item.idConductor,
-                        idViaje: idViaje
-                    },
-                    success: function (response2) {
-                        console.log(response2);
-                        if (response2 != "Exitoso") {
-                            alert("Algo salio mal");
-                        }
-                    }
-                });
-            });
+        success: function (response2) {
+            console.log(response2);
+            if (response2 != "Exitoso") {
+                alert("Algo salio mal");
+            }
         }
     });
 

@@ -39,6 +39,7 @@ $(document).ready(function () {
         var correoCont = $("#inputCorreoCont").val();
         var fechaNacCont = $("#inputFechaCont").val();
         var telCont = $("#inputTelCont").val();
+        var correo = $("#inputCorreo").val();
 
         if (tel == null || tel == "") {
             alert("Teléfono vacio");
@@ -62,6 +63,12 @@ $(document).ready(function () {
         }
         if (correoCont == null || correoCont == "") {
             alert("Correo de contacto de confianza vacio");
+            return;
+        } else if (!/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(correoCont)) {
+            alert("La dirección de email " + correoCont + " es incorrecta.");
+            return;
+        } else if (correoCont == correo) {
+            alert("La direccion de correo de usuario y de contacto de confianza no pueden ser la misma");
             return;
         }
         if (fechaNacCont == null || fechaNacCont == "") {

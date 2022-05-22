@@ -65,6 +65,9 @@ $(document).ready(function () {
         if (correo == null || correo == "") {
             alert("Correo vacio");
             return;
+        } else if (!/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(correo)) {
+            alert("La dirección de email " + correo + " es incorrecta.");
+            return;
         }
         if (nombre == null || nombre == "") {
             alert("Nombre vacio");
@@ -100,6 +103,12 @@ $(document).ready(function () {
         }
         if (correoCont == null || correoCont == "") {
             alert("Correo de contacto de confianza vacio");
+            return;
+        } else if (!/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(correoCont)) {
+            alert("La dirección de email " + correoCont + " es incorrecta.");
+            return;
+        } else if (correo == correoCont) {
+            alert("La direccion de correo de usuario y de contacto de confianza no pueden ser la misma");
             return;
         }
         if (nombreCont == null || nombreCont == "") {
@@ -147,5 +156,14 @@ $(document).ready(function () {
             },
         });
 
+    });
+
+
+    $.ajax({
+        type: "post",
+        url: "PHP/actualizarBD.php",
+        success: function (response) {
+            console.log(response);
+        }
     });
 });
