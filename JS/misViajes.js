@@ -73,7 +73,7 @@ $(document).ready(function () {
                                 info += `
                                     <div class="col-md-2 d-flex align-content-around flex-wrap justify-content-center">
                                         <button type="button" class="btn btn-outline-success" onclick="aceptarUsuario('${item2.idUsuario}', '${item.idViaje}', '${item2.idPasajero}')">Aceptar</button>
-                                        <button type="button" class="btn btn-outline-danger" onclick="rechazarUsuario('${item2.idPasajero}')">Rechazar</button>
+                                        <button type="button" class="btn btn-outline-danger" onclick="rechazarUsuario('${item2.idPasajero}', '${item2.idUsuario}', '${item.idViaje}')">Rechazar</button>
                                     </div>
                                 </div>
                                 `;
@@ -330,7 +330,9 @@ function getEdad(dateString) {
     return edad
 }
 
-function rechazarUsuario(idPasajero) {
+function rechazarUsuario(idPasajero, idUsuario, idViaje) {
+    var intermedio = "";
+    var principio = "";
     $.ajax({
         type: "post",
         url: "PHP/rechazar.php",
@@ -343,8 +345,66 @@ function rechazarUsuario(idPasajero) {
             } else {
                 alert("Algo salio mal");
             }
-            location.reload();
         }
+    });
+
+    $.ajax({
+        type: "post",
+        url: "PHP/rellenoMisViajes4.php",
+        data: {
+            idViaje: idViaje
+        },
+        success: function (response) {
+            response = JSON.parse(response);
+
+            response.map(item => {
+                intermedio += `
+                    Datos del viaje:
+                    Id del Viaje: "${item.idViaje}"\tSalida de origen: “${item.nombreOrigen}”\tDestino: “${item.nombreDestino}"\tFecha: “${item.fechaViaje}”\tHora: “${item.horaViaje}”
+                `;
+            });
+        }
+    });
+
+    $.ajax({
+        type: "post",
+        url: "PHP/rellenoCuenta",
+        data: {
+            idUsuario: idUsuario
+        },
+        success: function (response) {
+            response = JSON.parse(response);
+
+            response.map(item => {
+                principio = `
+                    Star Trip
+
+                    Has sido ACEPTADO en tu viaje\n\n
+                `;
+
+                var mensaje = principio + intermedio;
+                var asunto = `Has sido ACEPTADO en tu viaje`;
+                var email = item.correo;
+                var header = `From: noreply@StarTrip.com\r\nReply-To: noreply@StarTrip.com\r\n`;
+                $.ajax({
+                    type: "post",
+                    url: "PHP/correo.php",
+                    data: {
+                        mensaje: mensaje,
+                        asunto: asunto,
+                        email: email,
+                        header: header
+                    },
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+            });
+        }
+    });
+    
+    $(document).ajaxStop(function () { 
+        location.reload();
     });
 }
 
@@ -412,8 +472,6 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
             } else {
                 alert("Algo salio mal");
             }
-
-            location.reload();
         }
     });
 
@@ -492,7 +550,7 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
                                 header: header
                             },
                             success: function (response) {
-                              console.log(response);  
+                                console.log(response);
                             }
                         });
                     });
@@ -533,8 +591,28 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
                                 header: header
                             },
                             success: function (response) {
-                              console.log(response);  
+                                console.log(response);
                             }
+                        });
+
+                        $(selector).ajaxStop(function () {
+                            var msg = `Has sido ACEPTADO en tu viaje\n\n` + intermedio;
+                            var correoAceptado = item.correo;
+                            var asuntoAceptado = `Has sido ACEPTADO en tu viaje`;
+
+                            $.ajax({
+                                type: "post",
+                                url: "PHP/correo.php",
+                                data: {
+                                    mensaje: msg,
+                                    asunto: asuntoAceptado,
+                                    email: correoAceptado,
+                                    header: header
+                                },
+                                success: function (response) {
+                                    console.log(response);
+                                }
+                            });
                         });
                     });
                 }
@@ -572,12 +650,16 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
                                 header: header
                             },
                             success: function (response) {
-                              console.log(response);  
+                                console.log(response);
                             }
                         });
                     });
                 }
             });
         });
+    });
+
+    $(document).ajaxStop(function () { 
+        location.reload();
     });
 }
