@@ -350,6 +350,8 @@ function rechazarUsuario(idPasajero) {
 
 function aceptarUsuario(idUsuario, idViaje, idPasajero) {
     var idUsuarioActual = $("#idUsuarioActual").html();
+    var aceptadosAct;
+
     $.ajax({
         type: "post",
         url: "PHP/rellenoMisViajes5.php",
@@ -358,6 +360,7 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
         },
         success: function (response) {
             response = JSON.parse(response);
+            aceptadosAct = response;
 
             console.log(response);
 
@@ -412,5 +415,169 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
 
             location.reload();
         }
+    });
+
+    var intermedio = "";
+    var final = "Datos de pasajeros:\n";
+
+    $.ajax({
+        type: "post",
+        url: "PHP/rellenoMisViajes5.php",
+        data: {
+            idViaje: idViaje
+        },
+        success: function (response) {
+            response = JSON.parse(response);
+
+            response.map(item => {
+                final += `
+                    Pasajero: "${item.idPasajero}"\tNombre: "${item.nombrePasajero} ${item.apePaPasajero} ${item.apeMaPasajero}"\tEdad: "${getEdad(item.fechaNacimiento)}"\tCorreo: "${item.correo}"\tTelefono: "${item.telefono}"\tDireccion: "${item.direccion}\tLugares reservados en el viaje: "${item.lugares}"\tEquipaje: "${item.equipaje}"\n
+                `;
+            });
+        }
+    });
+
+    $.ajax({
+        type: "post",
+        url: "PHP/rellenoMisViajes4.php",
+        data: {
+            idViaje: idViaje
+        },
+        success: function (response) {
+            response = JSON.parse(response);
+
+            response.map(item => {
+                intermedio += `
+                    Datos del viaje:
+                    Id del Viaje: "${item.idViaje}"\tSalida de origen: “${item.nombreOrigen}”\tDestino: “${item.nombreDestino}"\tFecha: “${item.fechaViaje}”\tHora: “${item.horaViaje}”
+                    
+                    Datos del conductor:
+                    Nombre: ”${item.nombreConductor} ${item.apePaConductor} ${item.apeMaConductor}”\tId del auto: "${item.idAuto}"\tMarca del auto: ”${item.marcaAuto}”\tModelo: ”${item.modeloAuto}”\tPlacas: ”${item.placasAuto}"\tColor: ”${item.colorAuto}”\n\n
+                `;
+            });
+        }
+    });
+
+    $(document).ajaxStop(function () {
+        aceptadosAct.map(item => {
+            $.ajax({
+                type: "post",
+                url: "PHP/rellenoCuenta",
+                data: {
+                    idUsuario: item.idUsuario
+                },
+                success: function (response) {
+                    response = JSON.parse(response);
+
+                    response.map(item => {
+                        var principio = `
+                            Star Trip
+
+                            Aviso de seguimiento de viaje.
+                            
+                            Como contacto de confianza del usuario “${item.nombre} ${item.apePaterno} ${item.apeMaterno}”, se le informa a usted de los datos del viaje próximo a realizar.\n\n
+                        `;
+
+                        var mensaje = principio + intermedio + final;
+                        var asunto = `Informacion de viaje de ${item.nombre} ${item.apePaterno} ${item.apeMaterno}`;
+                        var email = item.correoCont;
+                        var header = `From: noreply@StarTrip.com\r\nReply-To: noreply@StarTrip.com\r\n`;
+                        $.ajax({
+                            type: "post",
+                            url: "PHP/correo.php",
+                            data: {
+                                mensaje: mensaje,
+                                asunto: asunto,
+                                email: email,
+                                header: header
+                            },
+                            success: function (response) {
+                              console.log(response);  
+                            }
+                        });
+                    });
+                }
+            });
+        });
+
+        $(document).ajaxStop(function () {
+            $.ajax({
+                type: "post",
+                url: "PHP/rellenoCuenta",
+                data: {
+                    idUsuario: idUsuario
+                },
+                success: function (response) {
+                    response = JSON.parse(response);
+
+                    response.map(item => {
+                        var principio = `
+                            Star Trip
+
+                            Aviso de seguimiento de viaje.
+                            
+                            Como contacto de confianza del usuario “${item.nombre} ${item.apePaterno} ${item.apeMaterno}”, se le informa a usted de los datos del viaje próximo a realizar.\n\n
+                        `;
+
+                        var mensaje = principio + intermedio + final;
+                        var asunto = `Informacion de viaje de ${item.nombre} ${item.apePaterno} ${item.apeMaterno}`;
+                        var email = item.correoCont;
+                        var header = `From: noreply@StarTrip.com\r\nReply-To: noreply@StarTrip.com\r\n`;
+                        $.ajax({
+                            type: "post",
+                            url: "PHP/correo.php",
+                            data: {
+                                mensaje: mensaje,
+                                asunto: asunto,
+                                email: email,
+                                header: header
+                            },
+                            success: function (response) {
+                              console.log(response);  
+                            }
+                        });
+                    });
+                }
+            });
+
+            $.ajax({
+                type: "post",
+                url: "PHP/rellenoCuenta",
+                data: {
+                    idUsuario: idUsuarioActual
+                },
+                success: function (response) {
+                    response = JSON.parse(response);
+
+                    response.map(item => {
+                        var principio = `
+                            Star Trip
+
+                            Aviso de seguimiento de viaje.
+                            
+                            Como contacto de confianza del usuario “${item.nombre} ${item.apePaterno} ${item.apeMaterno}”, se le informa a usted de los datos del viaje próximo a realizar.\n\n
+                        `;
+
+                        var mensaje = principio + intermedio + final;
+                        var asunto = `Informacion de viaje de ${item.nombre} ${item.apePaterno} ${item.apeMaterno}`;
+                        var email = item.correoCont;
+                        var header = `From: noreply@StarTrip.com\r\nReply-To: noreply@StarTrip.com\r\n`;
+                        $.ajax({
+                            type: "post",
+                            url: "PHP/correo.php",
+                            data: {
+                                mensaje: mensaje,
+                                asunto: asunto,
+                                email: email,
+                                header: header
+                            },
+                            success: function (response) {
+                              console.log(response);  
+                            }
+                        });
+                    });
+                }
+            });
+        });
     });
 }
