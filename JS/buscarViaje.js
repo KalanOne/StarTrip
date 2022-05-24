@@ -200,6 +200,8 @@ $(document).ready(function () {
             $("#modales").html(modales);
         });
     });
+
+    $(".disclaimer").hide();
 });
 
 //  Se crea funcion para reservar el lugar en el viaje  //

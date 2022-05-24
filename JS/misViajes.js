@@ -323,6 +323,8 @@ $(document).ready(function () {
         $("#contieneViajes").append(info);
     });
 
+    $(".disclaimer").hide();
+
 });
 
 function getEdad(dateString) {
@@ -377,7 +379,7 @@ function rechazarUsuario(idPasajero, idUsuario, idViaje) {
 
     $.ajax({
         type: "post",
-        url: "PHP/rellenoCuenta",
+        url: "PHP/rellenoCuenta.php",
         data: {
             idUsuario: idUsuario
         },
@@ -529,7 +531,7 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
         aceptadosAct.map(item => {
             $.ajax({
                 type: "post",
-                url: "PHP/rellenoCuenta",
+                url: "PHP/rellenoCuenta.php",
                 data: {
                     idUsuario: item.idUsuario
                 },
@@ -570,7 +572,7 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
         $(document).ajaxStop(function () {
             $.ajax({
                 type: "post",
-                url: "PHP/rellenoCuenta",
+                url: "PHP/rellenoCuenta.php",
                 data: {
                     idUsuario: idUsuario
                 },
@@ -629,7 +631,7 @@ function aceptarUsuario(idUsuario, idViaje, idPasajero) {
 
             $.ajax({
                 type: "post",
-                url: "PHP/rellenoCuenta",
+                url: "PHP/rellenoCuenta.php",
                 data: {
                     idUsuario: idUsuarioActual
                 },

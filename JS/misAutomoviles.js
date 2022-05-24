@@ -92,6 +92,8 @@ $(document).ready(function () {
             }
         });
     });
+
+    $(".disclaimer").hide();
 });
 
 function eliminarAuto(idAuto) {

@@ -89,6 +89,8 @@ $(document).ready(function () {
         $("#contienePersonas").html(relleno);
     });
 
+    $(".disclaimer").hide();
+
 });
 
 //  Se crea funcion para opinar al usuario  //

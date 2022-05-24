@@ -174,4 +174,5 @@ $(document).ready(function () {
     $("#fechaNacRegistro").attr("max", fecha.toISOString().split('T')[0]);
     fecha.setFullYear(fecha.getFullYear() - 3);
     $("#fechaNacContRegistro").attr("max", fecha.toISOString().split('T')[0]);
+    $(".disclaimer").hide();
 });

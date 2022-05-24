@@ -12,7 +12,7 @@ try {
     $q = "INSERT INTO `opinion` (`idOpinion`, `descripcion`, `calificacion`, `estado`, `idCalificado`, `idCalificador`, `idViaje`) VALUES (NULL, NULL, NULL, '0', '$idUsuario1', '$idUsuario2', '$idViaje')";
     $res = $conexion->query($q) or die(print($conexion->errorInfo()));
 
-    $q = "INSERT INTO `opinion` (`idOpinion`, `descripcion`, `calificacion`, `estado`, `idCalificado`, `idCalificador`, `idViaje`) VALUES (NULL, '', '', '0', '$idUsuario2', '$idUsuario1', '$idViaje')";
+    $q = "INSERT INTO `opinion` (`idOpinion`, `descripcion`, `calificacion`, `estado`, `idCalificado`, `idCalificador`, `idViaje`) VALUES (NULL, NULL, NULL, '0', '$idUsuario2', '$idUsuario1', '$idViaje')";
     $res = $conexion->query($q) or die(print($conexion->errorInfo()));
 
     echo "Exitoso";
