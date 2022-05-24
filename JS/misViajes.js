@@ -18,8 +18,8 @@ $(document).ready(function () {
 
             response.map(item => {
 
-                info += `
-                    <section class="container py-3 my-2">
+                var secciones = `
+                    <section class="container py-3 my-2" id="viaje-${item.idViaje}">
                         <div class="row">
                             <ul class="list-group list-group-horizontal-md">
                                 <li class="list-group-item flex-fill">ID: ${item.idViaje}</li>
@@ -30,7 +30,10 @@ $(document).ready(function () {
                                 <li class="list-group-item flex-fill">Automóvil: ${item.marcaAuto} ${item.modeloAuto} ${item.colorAuto} ${item.placasAuto}</li>
                             </ul>
                         </div>
+                    </section>
                 `;
+
+                $("#contieneViajes").append(secciones);
 
                 $.ajax({
                     type: "post",
@@ -43,7 +46,7 @@ $(document).ready(function () {
 
                         console.log(modales);
                         console.log(info);
-
+                        info = "";
                         response2.map(item2 => {
                             info += `
                                 <div class="row mt-3 border border-secondary">
@@ -143,7 +146,7 @@ $(document).ready(function () {
                                 },
                             });
                         });
-
+                        $(`#viaje-${item.idViaje}`).append(info);
                     }
                 });
 
@@ -180,8 +183,8 @@ $(document).ready(function () {
                         console.log(info);
 
                         response2.map(item2 => {
-                            info += `
-                                <section class="container py-3 my-2">
+                            var secciones = `
+                                <section class="container py-3 my-2" id="viaje-${item.idViaje}">
                                     <div class="row">
                                         <ul class="list-group list-group-horizontal-md">
                                             <li class="list-group-item flex-fill">ID: ${item.idViaje}</li>
@@ -192,7 +195,10 @@ $(document).ready(function () {
                                             <li class="list-group-item flex-fill">Automóvil: ${item2.marcaAuto} ${item2.modeloAuto} ${item2.colorAuto} ${item2.placasAuto}</li>
                                         </ul>
                                     </div>
+                                </section>
                             `;
+
+                            $("#contieneViajes").append(secciones);
 
                             $.ajax({
                                 type: "post",
@@ -206,6 +212,7 @@ $(document).ready(function () {
                                     console.log(modales);
                                     console.log(info);
 
+                                    info = "";
                                     response3.map(item3 => {
                                         info += `
                                             <div class="row mt-3 border border-secondary">
@@ -289,6 +296,8 @@ $(document).ready(function () {
                                             },
                                         });
                                     });
+
+                                    $(`#viaje-${item.idViaje}`).append(info);
                                 }
                             });
 
@@ -303,15 +312,15 @@ $(document).ready(function () {
 
 
     $(document).ajaxStop(function () {
-        info += `
-            <h3 class="text-center mt-5">
+        info = `
+            <h3 class="text-center my-5">
                 <small class="text-muted">No se han encontrado mas viajes activos a los que pertenezca</small>
             </h3>
         `;
         console.log(modales);
         console.log(info);
         $("#contieneModales").html(modales);
-        $("#contieneViajes").html(info);
+        $("#contieneViajes").append(info);
     });
 
 });

@@ -22,6 +22,10 @@ $(document).ready(function () {
         }
     });
 
+    var fecha = new Date();
+    fecha.setDate(fecha.getDate() + 1);
+    $("#inputFecha").attr("min", fecha.toISOString().split('T')[0]);
+
     //  Se genera la accion al dar click en el boton para buscar viaje  //
     $("#buscarViajeBTN").click(function (e) {
         e.preventDefault();

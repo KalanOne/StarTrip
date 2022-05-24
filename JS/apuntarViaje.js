@@ -48,6 +48,10 @@ $(document).ready(function () {
         }
     });
 
+    var fecha = new Date();
+    fecha.setDate(fecha.getDate() + 2);
+    $("#inputFecha").attr("min", fecha.toISOString().split('T')[0]);
+
     //  Se genera la accion al dar click en el boton para crear viaje  //
     $("#apuntarViaje").click(function (e) {
         e.preventDefault();

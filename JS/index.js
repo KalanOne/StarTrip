@@ -166,4 +166,12 @@ $(document).ready(function () {
             console.log(response);
         }
     });
+
+    var fecha = new Date();
+    fecha.setFullYear(fecha.getFullYear() - 15);
+    fecha.setMonth(11);
+    fecha.setDate(31);
+    $("#fechaNacRegistro").attr("max", fecha.toISOString().split('T')[0]);
+    fecha.setFullYear(fecha.getFullYear() - 3);
+    $("#fechaNacContRegistro").attr("max", fecha.toISOString().split('T')[0]);
 });
